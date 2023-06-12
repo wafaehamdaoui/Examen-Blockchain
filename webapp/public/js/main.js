@@ -6,25 +6,26 @@ let contract;
 let projectCount;
 let projects = [];
 //let donations = [];
-//let accountElement = document.getElementById("accountElement");
+let accountElement = document.getElementById("accountElement");
+let createBtn = document.getElementById("createBtn");
 let main = async () => {
-  if (!window.ethereum)
-    return alert('Please download MetaMask');
-
-  window.ethereum.on('accountsChanged', (accounts) => {
-    account = accounts[0];
-    accountElement.innerText = account;
-    loadProjects();
-  });
-
-  web3js = new Web3(window.ethereum);
-
-  account = (await web3js.eth.requestAccounts())[0];
-  console.log(account);
-  accountElement.innerText = account;
-
-  contract = new web3js.eth.Contract(ABI, ContractAddress);
-  console.log(contract);
+    if (!window.ethereum)
+      return alert('please download metamask')
+    window.ethereum.on('accountsChanged', (accounts) => {
+      account = accounts[0]
+      accountElement.innerText = account
+      loadTickets();
+    })
+    web3js = new Web3(window.ethereum)
+    //1- recuperation du compte addresse depuis metamask
+    account = (await web3js.eth.requestAccounts())[0]
+    console.log(account);
+    accountElement.innerText = account
+  
+    // ----- creation de l objet contract
+  
+    contract = new web3js.eth.Contract(ABI, ContractAddress);
+    console.log(contract)
 
   createBtn.addEventListener('click', () => {
     modal.show();
@@ -35,8 +36,7 @@ let main = async () => {
 
 main();
 
-async function loadProjects() {
-  try {
+const loadProjects = async () => {
     projectCount = await contract.methods.projectCount().call();
     console.log("Number of projects:", projectCount);
 
@@ -53,11 +53,9 @@ async function loadProjects() {
     projects.forEach((project) => {
         displayProject(project);
   });
-
-  } catch (error) {
-    console.error("Error loading projects:", error);
-  }
 }
+
+
 
 const displayProject = (project) => {
     let projectCard = document.createElement('div');
@@ -128,7 +126,7 @@ const displayProject = (project) => {
   }
   hideLoading();
  }
- const createForm = document.getElementById('createForm');
+ const createForm = document.getElementById('createModal');
   createForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const title = document.getElementById('titleInput').value;
@@ -171,6 +169,7 @@ async function getDonors(projectId) {
   } catch (error) {
     console.error("Error getting donors:", error);
   }
+}
 
   const displayLoading = () => {
     const loadingContainer = document.getElementById('loadingContainer');
@@ -181,4 +180,4 @@ async function getDonors(projectId) {
     const loadingContainer = document.getElementById('loadingContainer');
     loadingContainer.style.display = 'none';
   };
-}
+

@@ -57,6 +57,8 @@ contract Project {
         address projectOwner = projects[_projectId].owner;
         payable(projectOwner).transfer(msg.value);
     }
+}
+
     //constructor() {
 
     //}

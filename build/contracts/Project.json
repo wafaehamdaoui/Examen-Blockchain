@@ -8922,12 +8922,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x86799AC5048886AD5DAF748bC454D66F554d9785",
-      "transactionHash": "0x89c18f1b061b3f34986331c196946332c865193be1a1acac217138f3452e0f80"
+      "address": "0x374Ba4884849d5fae44F92D6DA8363eDE18ff592",
+      "transactionHash": "0x4891c3734f5d8c1ad1313e13e731ce21b27b8a26a48f73122c7199f3f1863389"
     }
   },
   "schemaVersion": "3.4.14",
-  "updatedAt": "2023-06-12T14:34:03.854Z",
+  "updatedAt": "2023-06-12T16:41:33.444Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
